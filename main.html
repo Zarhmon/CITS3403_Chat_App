@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Chat Interface Wireframe</title>
+    <style type="text/css">
+      body {
+        margin-left: 10%;
+        margin-right: 10%;
+        padding: 5;
+        background-color: #9c2626;
+        font-family: Arial, sans-serif;
+        font-size: 14px;
+      }
+
+      .container {
+        width: 100%;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        background-color: #26a742;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      .chat-box {
+        flex: 1;
+        height: 80%;
+        width: 100%;
+        overflow-y: scroll;
+        margin-bottom: 20px;
+        padding-bottom: 40px;
+        padding-right: 20px;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      .chat-box::-webkit-scrollbar {
+        display: none;
+      }
+
+      .chat-box .message {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 20px;
+      }
+
+      .chat-box .message .avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: #cccccc;
+        margin-right: 10px;
+        width: 40px;
+        height: 40px;
+        padding-right: 1px;
+      }
+
+      .chat-box .message .text {
+        background-color: #f2f2f2;
+        padding: 10px;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        word-wrap: break-word;
+        width: calc(100% - 50px);
+        max-width: calc(100% - 50px);
+      }
+
+      .chat-box .message .text p {
+        margin: 0;
+      }
+
+      .chat-box .message.outgoing .text {
+        background-color: #dcf8c6;
+      }
+
+      .chat-input {
+        display: flex;
+        align-items: center;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        margin-bottom: 20px;
+        width: 100%;
+      }
+
+      .chat-input input[type="text"] {
+        flex: 1;
+        border: none;
+        padding: 10px;
+        font-size: 14px;
+        background-color: transparent;
+      }
+
+      .chat-input input[type="submit"] {
+        border: none;
+        background-color: #4caf50;
+        color: #ffffff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-left: 10px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="chat-box">
+        <!-- messages go here -->
+      </div>
+      <div class="chat-input">
+        <input type="text" placeholder="Type your message here..." />
+        <input type="submit" value="Send" />
+      </div>
+    </div>
+    <script type="text/javascript">
+      // select the chat input field and send button
+      const inputField = document.querySelector(
+        ".chat-input input[type='text']"
+      );
+      const sendButton = document.querySelector(
+        ".chat-input input[type='submit']"
+      );
+
+      // select the chat box where messages will be displayed
+      const chatBox = document.querySelector(".chat-box");
+
+      // function to add a new message to the chat box
+      function addMessage(messageText, isOutgoing) {
+        // create a new message div
+        const messageDiv = document.createElement("div");
+        messageDiv.classList.add("message");
+
+        // add an avatar image to the message div
+        const avatarDiv = document.createElement("div");
+        avatarDiv.classList.add("avatar");
+        messageDiv.appendChild(avatarDiv);
+
+        // add the message text to the message div
+        const textDiv = document.createElement("div");
+        textDiv.classList.add("text");
+        textDiv.innerHTML = "<p>" + messageText + "</p>";
+        messageDiv.appendChild(textDiv);
+
+        // add a class to the message div to indicate whether it's an outgoing message or not
+        if (isOutgoing) {
+          messageDiv.classList.add("outgoing");
+        }
+
+        // add the message div to the chat box
+        chatBox.appendChild(messageDiv);
+
+        // scroll the chat box to the bottom to show the latest message
+        chatBox.scrollTop = chatBox.scrollHeight;
+      }
+
+      // function to handle sending a new message
+      function sendMessage() {
+        // get the text from the input field
+        const messageText = inputField.value;
+
+        // only add a new message if the input field isn't empty
+        if (messageText.trim() !== "") {
+          // add the new message to the chat box
+          addMessage(messageText, true);
+
+          // clear the input field
+          inputField.value = "";
+        }
+      }
+
+      // add an event listener to the send button to handle sending a new message
+      sendButton.addEventListener("click", sendMessage);
+
+      // add an event listener to the input field to handle sending a new message when the user presses Enter
+      inputField.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          sendMessage();
+        }
+      });
+    </script>
+  </body>
+</html>
