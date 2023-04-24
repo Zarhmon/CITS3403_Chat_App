@@ -1,4 +1,14 @@
+// Get user information and avatar from sessionStorage
+const userAvatar = document.getElementById('user-avatar');
+const userName = document.getElementById('user-name');
 
+if (sessionStorage.getItem('user_name') && sessionStorage.getItem('user_image')) {
+  userAvatar.src = sessionStorage.getItem('user_image');
+  userName.textContent = sessionStorage.getItem('user_name');
+} else {
+  // Redirect the user to the login page if they haven't logged in
+  window.location.href = 'login.html';
+}
 // select the chat input field and send button
 const inputField = document.querySelector(
 ".chat-input input[type='text']"
