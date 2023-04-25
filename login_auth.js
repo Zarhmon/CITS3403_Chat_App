@@ -8,32 +8,52 @@ function init() {
     });
   }
   
-  // Google Sign-In API callback function
-  function onSignIn(googleUser) {
-    // Get the user's ID token, which you can use to authenticate with your backend server
+
+ // Google Sign-In API callback function
+function onSignIn(googleUser) {
+    // Get the user's ID token, used to authenticate backend server
     var id_token = googleUser.getAuthResponse().id_token;
   
     // Get the user's basic profile information
     var profile = googleUser.getBasicProfile();
   
     // Store the user's information in sessionStorage
-    sessionStorage.setItem('user_name', profile.getName());
-    sessionStorage.setItem('user_image', profile.getImageUrl());
+    sessionStorage.setItem("user_name", profile.getName());
+    sessionStorage.setItem("user_image", profile.getImageUrl());
   
     // Redirect the user to the chat application
-    window.location.href = 'main.html';
+    window.location.href = "main.html";
   }
+  
   
   function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      // Clear the sessionStorage
+    if (sessionStorage.getItem("user_name") === "Guest") {
+      // If the user is a guest, clear the sessionStorage and redirect to login page
       sessionStorage.clear();
-  
-      // Redirect the user to the login page
-      window.location.href = 'login.html';
-    });
+      window.location.href = "login.html";
+    } else {
+      // For Google accounts, use the Google API to sign out
+      const auth2 = gapi.auth2.getAuthInstance();
+      auth2.signOut().then(() => {
+        sessionStorage.clear();
+        window.location.href = "login.html";
+      });
+    }
   }
   
-  // Initialize the Google Sign-In API
+// Add a guest sign-in function
+function guestSignIn(event) {
+    // Prevent any default behavior
+    if (event) event.preventDefault();
+  
+    // Store guest user information in sessionStorage
+    sessionStorage.setItem("user_name", "Guest");
+    sessionStorage.setItem("user_image", "https://via.placeholder.com/40");
+  
+    // Redirect the user to the chat application
+    window.location.href = "main.html";
+  }
+  
+  // initialize the Google Sign-In API
   init();
+  

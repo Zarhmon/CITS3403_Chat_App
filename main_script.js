@@ -1,13 +1,19 @@
 // Get user information and avatar from sessionStorage
-const userAvatar = document.getElementById('user-avatar');
-const userName = document.getElementById('user-name');
+const userAvatar = document.getElementById("user-avatar");
+const userName = document.getElementById("user-name");
 
-if (sessionStorage.getItem('user_name') && sessionStorage.getItem('user_image')) {
-  userAvatar.src = sessionStorage.getItem('user_image');
-  userName.textContent = sessionStorage.getItem('user_name');
+if (
+  sessionStorage.getItem("user_name") &&
+  sessionStorage.getItem("user_image")
+) {
+  userAvatar.src = sessionStorage.getItem("user_image");
+  userName.textContent = sessionStorage.getItem("user_name");
+} else if (sessionStorage.getItem("user_name") === "Guest") {
+  userAvatar.src = "https://via.placeholder.com/40";
+  userName.textContent = "Guest";
 } else {
   // Redirect the user to the login page if they haven't logged in
-  window.location.href = 'login.html';
+  window.location.href = "login.html";
 }
 // select the chat input field and send button
 const inputField = document.querySelector(
@@ -71,3 +77,6 @@ sendMessage();
 }
 });
 
+// Add an event listener to the sign out button
+const signOutButton = document.getElementById("sign-out");
+signOutButton.addEventListener("click", signOut);
