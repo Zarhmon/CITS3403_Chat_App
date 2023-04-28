@@ -57,14 +57,17 @@ chatBox.scrollTop = chatBox.scrollHeight;
 
 // function to handle sending a new message
 function sendMessage() {
-// get the text from the input field
-const messageText = inputField.value;
+  // get the text from the input field
+  const messageText = inputField.value;
 
-// only add a new message if the input field isn't empty
-if (messageText.trim() !== "") {
-// add the new message to the chat box
-addMessage(messageText, true);
-}
+  // only add a new message if the input field isn't empty
+  if (messageText.trim() !== "") {
+    // add the new message to the chat box
+    inputField.value = "";
+    addMessage(messageText, true);
+    interpret(messageText);
+    
+  }
 }
 
 // add an event listener to the send button to handle sending a new message
@@ -76,6 +79,25 @@ if (event.key === "Enter") {
 sendMessage();
 }
 });
+
+function interpret(text) {
+  // temporary (?) function: interprets the user input for words related to the game
+  text = text.toLowerCase();
+  if (isPlaying) {
+    if (text.indexOf("quit") != -1 || text.indexOf("exit") != -1) {
+      // exit the game (to be implemented)
+      isPlaying = false;
+
+    } else if (text.length == 1 && 'a' <= text && text <= 'z') {
+      // player enters a letter from a - z
+      guessLetter(text);
+    }
+  } else {
+    if (text.indexOf("play") != -1 && text.indexOf("hangman") != -1) {
+      initHangman(Math.floor(Math.random() * 6) + 5)
+    }
+  }
+}
 
 // Add an event listener to the sign out button
 const signOutButton = document.getElementById("sign-out");
