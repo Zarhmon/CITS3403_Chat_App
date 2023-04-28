@@ -1,5 +1,9 @@
 // js for the Hangman game
 
+// to play, enter something containing "play" and "hangman" into the chatbox
+// to quit, enter something containing "quit" or "exit"
+// to make a guess, enter only a letter from a - z
+
 var isPlaying = false;
 var word; // the actual word, e.g. "hangman"
 var triesLeft; // tries remaining
