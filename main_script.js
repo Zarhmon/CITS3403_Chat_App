@@ -84,7 +84,7 @@ function interpret(text) {
   // temporary (?) function: interprets the user input for words related to the game
   text = text.toLowerCase();
   if (isPlaying) {
-    if (text.indexOf("quit") != -1 || text.indexOf("exit") != -1) {
+    if (text.includes("quit") || text.includes("exit")) {
       // exit the game (to be implemented)
       isPlaying = false;
 
@@ -93,7 +93,7 @@ function interpret(text) {
       guessLetter(text);
     }
   } else {
-    if (text.indexOf("play") != -1 && text.indexOf("hangman") != -1) {
+    if (text.includes("play") && text.includes("hangman")) {
       initHangman(Math.floor(Math.random() * 6) + 5)
     }
   }

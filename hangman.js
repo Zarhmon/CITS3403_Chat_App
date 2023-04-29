@@ -45,7 +45,7 @@ function sendClue(header) {
 function guessLetter(letter) {
   // player guesses the letter `letter`
   letter = letter.toUpperCase();
-  if (lettersGuessed.indexOf(letter) == -1) {
+  if (!lettersGuessed.includes(letter)) {
     // has not yet been guessed
     lettersGuessed += letter;
     let foundMatch = false;
