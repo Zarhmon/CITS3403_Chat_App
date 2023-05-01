@@ -39,7 +39,7 @@ function sendClue(header) {
       text += lettersGuessed[i];
     }
   }
-  addMessage(text, false);
+  addMessage(text, false, true);
 }
 
 function guessLetter(letter) {
@@ -63,7 +63,7 @@ function guessLetter(letter) {
 
     if (!foundMatch && --triesLeft == 0) {
       sendClue();
-      addMessage('Game over.<br>Word: ' + word, false);
+      addMessage('Game over.<br>Word: ' + word, false, true);
       isPlaying = false;
     } else {
       sendClue();
