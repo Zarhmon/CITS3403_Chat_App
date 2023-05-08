@@ -127,17 +127,3 @@ body {
   cursor: pointer;
   font-size: 14px;
 }
-
-.project-description {
-  margin-top: 20px;
-}
-
-.project-description h2 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
-
-.project-description p {
-  font-size: 16px;
-  line-height: 1.5;
-}
