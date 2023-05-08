@@ -130,8 +130,16 @@ function interpret(text) {
         addMessage("You have decided not to play hangman.<br>\
         If you change your mind, you can enter \"play hangman\" to play again.", false, true);
       } else {
-        if (text.length == 1 && '1' <= text && text <= '3') {
-          difficulty = text - '0'; // text as integer
+        if ((text.length == 1 && '1' <= text && text <= '3') || text.hasAnyOf("easy", "medium", "hard")) {
+          if (text.includes("easy")) {
+            difficulty = 1;
+          } else if (text.includes("medium")) {
+            difficulty = 2;
+          } else if (text.includes("hard")) {
+            difficulty = 3;
+          } else {
+            difficulty = text - '0'; // text as integer
+          }
           addMessage("Now playing hangman on " + ["easy", "medium", "hard"][difficulty - 1] + " difficulty.");
           addMessage("Enter a letter from A - Z to guess it.");
           isSelectingDifficulty = false;

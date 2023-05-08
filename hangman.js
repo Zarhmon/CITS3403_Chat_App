@@ -4,6 +4,7 @@
 // to quit, enter something containing "quit" or "exit"
 // to make a guess, enter only a letter from a - z
 
+var highscores = [0, 0, 0]; // e, m, h highscores (data will have to be stored in a db)
 var difficulty;
 var word; // the actual word, e.g. "hangman"
 var triesLeft; // tries remaining
@@ -23,7 +24,7 @@ function initHangman(len) {
   xhttp.onload = function() {
     if (this.status == 200) {
       word = JSON.parse(this.responseText)[0];
-      triesLeft = len + 3; // chose arbitrary value
+      triesLeft = 8; // chose arbitrary value
       lettersGuessed = "";
       guess = new Array();
       isPlaying = true;
@@ -79,7 +80,15 @@ function guessLetter(letter) {
     } else {
       sendClue();
       if (guess.indexOf('_') == -1) {
-        addMessage('You win!<br><br>Score: ' + score, false, true);
+        let highscore = highscores[difficulty - 1];
+        let message = 'You win!<br><br>Score: ' + score + '<br>';
+        if (score > highscore) {
+          message += 'New highscore! (Previously ' + highscore + ')';
+          highscores[difficulty - 1] = score;
+        } else {
+          message += 'Highscore: ' + highscore;
+        }
+        addMessage(message, false, true);
         isPlaying = false;
       }
       
