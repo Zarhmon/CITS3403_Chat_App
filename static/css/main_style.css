@@ -2,7 +2,7 @@ body {
   margin-left: 10%;
   margin-right: 10%;
   padding: 5;
-  background-color: #2f4858;
+  background-color: #124975;
   font-family: Arial, sans-serif;
   font-size: 14px;
 }
@@ -15,7 +15,7 @@ body {
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  background-color: #009d6b;
+  background-color: #4f79a9;
   border-radius: 10px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -54,7 +54,7 @@ body {
 }
 
 .chat-box .message .text {
-  background-color: #d0fac5b2;
+  background-color: #dbf2ff;
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
