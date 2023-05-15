@@ -45,5 +45,5 @@ function addEventListenerById(elementId, eventType, eventHandler) {
 }
 
 // Add event listeners
-addEventListenerById('guest-sign-in', 'click', guestSignIn);
+addEventListenerById('guest-signin', 'click', guestSignIn);
 addEventListenerById('sign-out', 'click', signOut);
