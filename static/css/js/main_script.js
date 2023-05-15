@@ -18,10 +18,8 @@ if (
 } else if (sessionStorage.getItem("user_name") === "Guest") {
   userAvatar.src = "https://via.placeholder.com/40";
   userName.textContent = "Guest";
-} else {
-  // Redirect the user to the login page if they haven't logged in
-  window.location.href = "login.html";
 }
+
 // select the chat input field and send button
 const inputField = document.querySelector(
   ".chat-input input[type='text']"
@@ -192,6 +190,7 @@ String.prototype.hasAllOf = function (...words) {
 }
 
 // Add an event listener to the sign out button
+console.log('Adding event listener to sign out button');
 const signOutButton = document.getElementById("sign-out");
 signOutButton.addEventListener("click", signOut);
 

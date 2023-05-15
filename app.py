@@ -1,44 +1,42 @@
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 import pymysql.cursors
-from flask import session
 
 app = Flask(__name__)
+app.secret_key = 'CITS_Secret_Key_3403'
 
-# MySQL configurations
 db_params = {
     'host': 'localhost',
-    'user': 'root',  
-    'password': 'SQLPASSWORD',  
-    'db': 'CITS3403_CHAT_APP'  
+    'user': 'root',
+    'password': 'SQLPASSWORD',
+    'db': 'CITS3403_CHAT_APP'
 }
-
-# Secret key for flash messages
-app.secret_key = 'CITS_Secret_Key_3403'
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     print(request.method)  # Print out the HTTP method used
     if request.method == 'POST':
-        user_details = request.form
-        email = user_details['email']
-        password = user_details['password']
-
-        # Check if the user exists in the database
-        connection = pymysql.connect(**db_params)
         try:
-            with connection.cursor() as cursor:
-                cursor.execute("SELECT * FROM users WHERE email = %s AND password = %s", (email, password))
-                user = cursor.fetchone()
-        finally:
-            connection.close()
+            user_details = request.form
+            email = user_details['email']
+            password = user_details['password']
 
-        if user:
-            # Store the user's information in the session
-            session['user'] = user
-            flash('Logged in successfully!', 'success')
-            return redirect(url_for('main'))
-        else:
-            flash('Invalid email or password.', 'danger')
+            connection = pymysql.connect(**db_params)
+            try:
+                with connection.cursor() as cursor:
+                    cursor.execute("SELECT * FROM users WHERE email = %s AND password = %s", (email, password))
+                    user = cursor.fetchone()
+            finally:
+                connection.close()
+
+            if user:
+                session['user'] = user
+                print(session['user'])  # Add this line for debugging
+                flash('Logged in successfully!', 'success')
+                return redirect(url_for('main'))
+            else:
+                flash('Invalid email or password.', 'danger')
+        except Exception as e:
+            flash('An error occurred while logging in: {}'.format(str(e)), 'danger')
 
     return render_template('login.html')
 
@@ -49,18 +47,15 @@ def register():
         email = user_details['reg_email']
         password = user_details['reg_password']
 
-        # Connect to the database
         connection = pymysql.connect(**db_params)
         try:
             with connection.cursor() as cursor:
-                # Check if the user already exists in the database
                 cursor.execute("SELECT * FROM users WHERE email = %s", [email])
                 user = cursor.fetchone()
 
                 if user:
                     flash('A user with this email already exists.', 'danger')
                 else:
-                    # Insert the new user into the database
                     cursor.execute("INSERT INTO users(email, password) VALUES(%s, %s)", (email, password))
                     connection.commit()
                     flash('Account created successfully! Please log in.', 'success')
@@ -85,18 +80,16 @@ def home():
 
 @app.route('/main')
 def main():
+    print(session)  # Add this line for debugging
     if 'user' not in session:
-        # User is not logged in
         return redirect(url_for('login'))
 
     return render_template('main.html')
 
+@app.route('/guest_login', methods=['POST'])
+def guest_login():
+    session['user'] = {"username": "Guest"}
+    return {"status": "success"}, 200
+
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-
-
-
-
-

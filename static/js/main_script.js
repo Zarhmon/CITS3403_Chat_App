@@ -20,7 +20,7 @@ if (
   userName.textContent = "Guest";
 } else {
   // Redirect the user to the login page if they haven't logged in
-  window.location.href = "login.html";
+  window.location.href = "/login";
 }
 // select the chat input field and send button
 const inputField = document.querySelector(

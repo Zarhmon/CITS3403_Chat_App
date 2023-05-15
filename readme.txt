@@ -1,4 +1,4 @@
-This is the readme containing the steps to run the project. NOT COMPLETE DRAFT. 
+This is the readme containing the steps to run the project. NOT COMPLETE DRAFT.
 
 To create a environment for Python while in project folder path in terminal type
 "py -m venv venv"
