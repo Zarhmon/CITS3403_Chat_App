@@ -18,10 +18,8 @@ if (
 } else if (sessionStorage.getItem("user_name") === "Guest") {
   userAvatar.src = "https://via.placeholder.com/40";
   userName.textContent = "Guest";
-} else {
-  // Redirect the user to the login page if they haven't logged in
-  window.location.href = "/login";
 }
+
 // select the chat input field and send button
 const inputField = document.querySelector(
   ".chat-input input[type='text']"
@@ -143,13 +141,13 @@ function interpret(text) {
           addMessage("Now playing hangman on " + ["easy", "medium", "hard"][difficulty - 1] + " difficulty.");
           addMessage("Enter a letter from A - Z to guess it.");
           isSelectingDifficulty = false;
-          initHangman(Math.floor(Math.random() * 3) + 3 * difficulty + 1);
+          initHangman(Math.floor(Math.random() * 3) + 3 * (1 - difficulty) + 10);
         }
       }
-
+    // not in the difficulty selection mode
     } else {
       if (justCompletedGame) {
-        if (text.hasAnyOf("yes", "play")) {
+        if (text.hasAnyOf("yes", "play", "yeah")) {
           justCompletedGame = false;
           interpret("play hangman");
         } else if (text.hasAnyOf("no", "do not", "don't")) {
@@ -157,17 +155,23 @@ function interpret(text) {
           addMessage("You are no longer playing hangman.");
         }
 
+        // in main menu
       } else {
 
         if (text.hasAllOf("play", "hangman")) {
           addMessage("Select a difficulty by entering one of the following:<br><br>\
-          1: Easy (4 - 6 letters)<br>\
-          2: Medium (7 - 9 letters)<br>\
-          3: Hard (10 - 12 letters)<br><br>\
+          1: Easy (8 tries allowed)<br>\
+          2: Medium (7 tries allowed)<br>\
+          3: Hard (6 tries allowed)<br><br>\
           Alternatively, enter \"quit\" if you do not wish to play.", false, true);
           isSelectingDifficulty = true;
+        } else if (text.hasAnyOf("highscore", "record", "high score")) {
+          addMessage("Your highscores:<br><br>\
+          Easy:   " + highscores[0] + "<br>\
+          Medium: " + highscores[1] + "<br>\
+          Hard:   " + highscores[2], false, true)
         } else if (text.hasAnyOf("help", "instruction", "what do i do", "guide", "what can i do")) {
-          addMessage("Enter \"play hangman\" if you would like to play!");
+          addMessage("Enter \"play hangman\" if you would like to play!<br>To view highscores, enter \"highscore\".", false, true);
         }
       }
 
@@ -192,6 +196,7 @@ String.prototype.hasAllOf = function (...words) {
 }
 
 // Add an event listener to the sign out button
+console.log('Adding event listener to sign out button');
 const signOutButton = document.getElementById("sign-out");
 signOutButton.addEventListener("click", signOut);
 
