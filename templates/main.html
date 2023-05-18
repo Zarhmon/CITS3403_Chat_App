@@ -12,9 +12,15 @@
   <body>
     <div class="container">
       <div class="user-info">
-        <img id="user-avatar" src="" alt="User Avatar" />
+        <img
+          id="user-avatar"
+          src=""
+          alt="User Avatar"
+          onerror="this.style.display='none'"
+        />
         <span id="user-name"></span>
         <button id="sign-out">Sign out</button>
+        <button id="highscores-button">Highscores</button>
       </div>
       <div class="chat-box"></div>
       <div class="chat-input">

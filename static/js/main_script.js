@@ -144,7 +144,7 @@ function interpret(text) {
           initHangman(Math.floor(Math.random() * 3) + 3 * (1 - difficulty) + 10);
         }
       }
-    // not in the difficulty selection mode
+      // not in the difficulty selection mode
     } else {
       if (justCompletedGame) {
         if (text.hasAnyOf("yes", "play", "yeah")) {
@@ -204,5 +204,10 @@ function chatbotInit() {
   addMessage("Hello, " + sessionStorage.getItem("user_name") + "! Would you like to play hangman?<br><br>\
   To play hangman, enter \"play hangman\" into the chatbox.", false, true);
 }
+
+const highscoresButton = document.getElementById("highscores-button");
+highscoresButton.addEventListener("click", function () {
+  window.location.href = '/highscores';
+});
 
 setTimeout(() => { chatbotInit(); }, 500); // pause for 0.5 secs (for effect) and then init

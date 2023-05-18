@@ -68,7 +68,7 @@ def register():
 
     return render_template('login.html')
 
-@app.route('/logout')
+@app.route('/logout', methods=['GET'])
 def logout():
     session.pop('user', None)
     flash('You have been logged out.', 'info')
@@ -84,12 +84,16 @@ def main():
     if 'user' not in session:
         return redirect(url_for('login'))
 
-    return render_template('main.html')
+    return render_template('main.html', user=session['user'])
 
 @app.route('/guest_login', methods=['POST'])
 def guest_login():
     session['user'] = {"username": "Guest"}
     return {"status": "success"}, 200
+
+@app.route('/highscores')
+def highscores():
+    return render_template('highscore.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

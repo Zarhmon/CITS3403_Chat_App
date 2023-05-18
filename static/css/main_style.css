@@ -127,3 +127,14 @@ body {
   cursor: pointer;
   font-size: 14px;
 }
+
+#highscores-button {
+  border: none;
+  background-color: #4caf50;
+  color: #ffffff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-left: 10px;
+}

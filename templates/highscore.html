@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>High Scores</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/highscore_style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>High Scores</h1>
+      <div class="highscores-container">
+        <div class="highscores-category">
+          <h2>Easy</h2>
+          <ol id="easy-highscores">
+            <!-- Highscores will be inserted here dynamically -->
+          </ol>
+        </div>
+        <div class="highscores-category">
+          <h2>Normal</h2>
+          <ol id="normal-highscores">
+            <!-- Highscores will be inserted here dynamically -->
+          </ol>
+        </div>
+        <div class="highscores-category">
+          <h2>Hard</h2>
+          <ol id="hard-highscores">
+            <!-- Highscores will be inserted here dynamically -->
+          </ol>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

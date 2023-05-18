@@ -1,0 +1,51 @@
+body {
+  /* This makes it so that the height of the body is always the full height of the viewport */
+  min-height: 100vh;
+  /* This makes it so that items positioned absolutely inside the body are relative to the body */
+  position: relative;
+
+  margin-left: 10%;
+  margin-right: 10%;
+  padding: 5px;
+  background-color: #124975;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.container {
+  /* This positions the container 75% from the top of the body */
+  position: absolute;
+  top: 10%;
+  /* This centers the container horizontally */
+  left: 50%;
+  transform: translateX(-50%);
+
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  background-color: #4f79a9;
+  border-radius: 10px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.container h1 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.highscores-container {
+  /* This makes it so that the highscores categories are displayed side by side */
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.highscores-category {
+  /* This limits the number of highscores displayed to 10 */
+  max-height: 10em;
+  overflow-y: auto;
+}
