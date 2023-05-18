@@ -152,7 +152,7 @@ function guessLetter(letter) {
 
 
   } else {
-    addMessage(`<b>{${letter}}</b> has already been guessed.`, false, true);
+    addMessage(`<b>${letter}</b> has already been guessed.`, false, true);
   }
 }
 
