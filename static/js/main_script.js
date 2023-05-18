@@ -145,7 +145,7 @@ function interpret(text) {
           } else {
             difficulty = text - '0'; // text as integer
           }
-          addMessage("Now playing hangman on " + ["easy", "medium", "hard"][difficulty - 1] + " difficulty.");
+          addMessage(`Now playing hangman on ${["easy", "medium", "hard"][difficulty - 1]} difficulty.`);
           addMessage("Getting word...<br><br>To guess a letter, enter it.<br>If you would like to quit, enter \"quit\".", false, true);
           isSelectingDifficulty = false;
           initHangman(Math.floor(Math.random() * 5) + 6);
@@ -208,8 +208,8 @@ function chatbotInit() {
     userName = "Player";
     sessionStorage.setItem("user_name", userName);
   }
-  addMessage("Hello, " + userName + "! Would you like to play hangman?<br><br>\
-  To play hangman, enter \"play\" into the chatbox.<br>For general help, enter \"help\".", false, true);
+  addMessage(`Hello, ${userName}! Would you like to play hangman?<br><br>
+  To play hangman, enter "play" into the chatbox.<br>For general help, enter "help".`, false, true);
 }
 
 const highscoresButton = document.getElementById("highscores-button");

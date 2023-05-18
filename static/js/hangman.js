@@ -91,11 +91,11 @@ function getDefinition() {
 
 function sendClue(header) {
   // bot sends a message for this clue
-  var text = guess.join(' ') + "<br><br>Tries remaining: " + triesLeft;
+  var text = `${guess.join(' ')}<br><br>Tries remaining: ${triesLeft}`;
   if (lettersGuessed) {
-    text += "<br><br><br>" + lettersGuessed.join(" ");
+    text += `<br><br><br>${lettersGuessed.join(" ")}`;
   }
-  text += "<br><br>Score: " + score;
+  text += `<br><br>Score: ${score}`;
   addMessage(text, false, true);
 }
 
@@ -135,7 +135,7 @@ function guessLetter(letter) {
           message += `New highscore! (Previously ${highscore})`;
           highscores[difficulty - 1] = score;
         } else {
-          message += 'Highscore: ' + highscore;
+          message += `Highscore: ${highscore}`;
         }
         addMessage(message, false, true);
         isPlaying = false;
