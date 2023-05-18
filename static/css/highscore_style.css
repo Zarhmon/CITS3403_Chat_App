@@ -49,3 +49,17 @@ body {
   max-height: 10em;
   overflow-y: auto;
 }
+
+#back-button {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#back-button:hover {
+  background-color: #4f79a9;
+  color: white;
+}
