@@ -95,5 +95,31 @@ def guest_login():
 def highscores():
     return render_template('highscore.html')
 
+
+# added this for storing scores 
+
+@app.route('/store_score', methods=['POST'])
+def store_score():
+    # Retrieve data from the POST request
+    data = request.get_json()
+    print(data)
+    difficulty = data.get('difficulty')
+    score = data.get('score')
+    user_email = session.get('user').get('email')
+
+    connection = pymysql.connect(**db_params)
+    try:
+        with connection.cursor() as cursor:
+            # Insert new score into the database
+            sql_query = "INSERT INTO game_scores (email, difficulty, score) VALUES (%s, %s, %s)"
+            cursor.execute(sql_query, (user_email, difficulty, score))
+            connection.commit()
+        return {"status": "success"}, 200
+    except Exception as e:
+        return {"status": "error", "message": str(e)}, 400
+    finally:
+        connection.close()
+
+
 if __name__ == '__main__':
     app.run(debug=True)

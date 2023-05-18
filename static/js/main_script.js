@@ -200,8 +200,14 @@ console.log('Adding event listener to sign out button');
 const signOutButton = document.getElementById("sign-out");
 signOutButton.addEventListener("click", signOut);
 
+// need to set this up to get username from email
 function chatbotInit() {
-  addMessage("Hello, " + sessionStorage.getItem("user_name") + "! Would you like to play hangman?<br><br>\
+  let userName = sessionStorage.getItem("user_name");
+  if (!userName) {
+    userName = "Player";
+    sessionStorage.setItem("user_name", userName);
+  }
+  addMessage("Hello, " + userName + "! Would you like to play hangman?<br><br>\
   To play hangman, enter \"play hangman\" into the chatbox.", false, true);
 }
 
@@ -210,4 +216,27 @@ highscoresButton.addEventListener("click", function () {
   window.location.href = '/highscores';
 });
 
+function storeScore(score) {
+  console.log(`Storing score: score=${score}`);
+  fetch('/store_score', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      score: score
+    }),
+  })
+    .then(response => response.json())
+    .then(data => {
+      if (data.status === "success") {
+        console.log("Score saved successfully.");
+      } else {
+        console.error("An error occurred while saving the score:", data.message);
+      }
+    });
+}
+
 setTimeout(() => { chatbotInit(); }, 500); // pause for 0.5 secs (for effect) and then init
+
+

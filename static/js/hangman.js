@@ -73,6 +73,7 @@ function guessLetter(letter) {
       sendClue();
       addMessage('You lose...<br><br>The answer is: <b>' + word + '</b><br><br>Score: ' + score, false, true);
       isPlaying = false;
+      storeScore(score);  // Store the score after the game ends
     } else {
       sendClue();
       if (!guess.includes('_')) {
@@ -86,6 +87,7 @@ function guessLetter(letter) {
         }
         addMessage(message, false, true);
         isPlaying = false;
+        storeScore(score);  // Store the score after the game ends
       }
 
     }
@@ -93,6 +95,7 @@ function guessLetter(letter) {
     if (!isPlaying) {
       justCompletedGame = true;
       addMessage("Would you like to play again?")
+      storeScore(score);  // Store the score after the game ends
     }
 
 

@@ -1,5 +1,43 @@
 # CITS3403_Chat_App
 
+Zarhmon Knipping (22856487)
+Blake Griffiths (22764777)
+Farrel Kurniawan (23057954)
+Due May 22nd, 2023
+
+Context
+This application was designed to play a simple game of hangman that uses an uncommon library of words
+to help the user learn while playing a game.
+
+It consists of 3 html pages including a login, game (main) and highscores page.
+
+We used a high scores mechanic and difficulty levels to make the content more engaging,
+in combination with the large library of words we aimed to make the gameplay loop replay-able.
+
+Technology
+We used html and CSS to construct the structure and interface of the web application.
+JavaScript was to handle gameplay and backend elements of the application such as page navigation.
+Pythons Flask was used to interact with out MySQL server which was used to store user details such as login / account credentials,
+as well as holding our lists of high scores.
+We used Visual Studio Codes Prettier plugin to make sure that our code followed the same syntax.
+
+Member Contribution
+Blake
+• Game rule creation
+• Game research
+• Unit & User Acceptance Testing
+• Meeting lead & Minutes taker
+Zarhmon
+• UX design and implementation
+o Front and backend
+• Database creation and implementation
+• Documentation
+Farrel
+• Game research
+• Game rule creation
+• Game implementation
+• Systems creation
+
 This is the readme containing the steps to run the project.
 
 # To create a environment for Python while in project folder path in terminal type
