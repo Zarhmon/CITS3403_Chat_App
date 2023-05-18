@@ -40,6 +40,13 @@ function addMessage(messageText, isOutgoing, isInnerHTML) {
   // add an avatar image to the message div
   const avatarDiv = document.createElement("div");
   avatarDiv.classList.add("avatar");
+  if (isOutgoing) {
+    let image = document.createElement("img");
+    image.setAttribute("src", "/static/default_av.png");
+    image.setAttribute("width", "40");
+    image.setAttribute("height", "40");
+    avatarDiv.appendChild(image);
+  }
   messageDiv.appendChild(avatarDiv);
 
   // add the message text to the message div
