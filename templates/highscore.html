@@ -10,28 +10,32 @@
     />
   </head>
   <body>
-    <div class="container">
-      <h1>High Scores</h1>
-      <div class="highscores-container">
-        <div class="highscores-category">
-          <h2>Easy</h2>
-          <ol id="easy-highscores">
-            <!-- Highscores will be inserted here dynamically -->
-          </ol>
-        </div>
-        <div class="highscores-category">
-          <h2>Normal</h2>
-          <ol id="normal-highscores">
-            <!-- Highscores will be inserted here dynamically -->
-          </ol>
-        </div>
-        <div class="highscores-category">
-          <h2>Hard</h2>
-          <ol id="hard-highscores">
-            <!-- Highscores will be inserted here dynamically -->
-          </ol>
+    <div class="page-container">
+      <div class="container">
+        <button id="back-button">Go Back</button>
+        <h1>High Scores</h1>
+        <div class="highscores-container">
+          <div class="highscores-category">
+            <h2>Easy</h2>
+            <ol id="easy-highscores">
+              <!-- Highscores will be inserted here dynamically -->
+            </ol>
+          </div>
+          <div class="highscores-category">
+            <h2>Normal</h2>
+            <ol id="normal-highscores">
+              <!-- Highscores will be inserted here dynamically -->
+            </ol>
+          </div>
+          <div class="highscores-category">
+            <h2>Hard</h2>
+            <ol id="hard-highscores">
+              <!-- Highscores will be inserted here dynamically -->
+            </ol>
+          </div>
         </div>
       </div>
     </div>
+    <script src="{{ url_for('static', filename='js/highscore_script.js') }}"></script>
   </body>
 </html>
