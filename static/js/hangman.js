@@ -74,7 +74,7 @@ function getDefinition() {
     text += "<br><small>"
     if (wordJson.sourceUrls.length == 1) {
       let source = wordJson.sourceUrls[0];
-      text += `Source: <a href=${source}>${source}</a><br>`; 
+      text += `Source: <a href=${source}>${source}</a><br>`;
     } else {
       text += "Sources:<ul>"
       for (let i in wordJson.sourceUrls) {
@@ -147,7 +147,7 @@ function guessLetter(letter) {
     if (!isPlaying) {
       justCompletedGame = true;
       addMessage("Do you know this word?");
-      storeScore(score);  // Store the score after the game ends
+      //storeScore(score);  // Store the score after the game ends
     }
 
 
