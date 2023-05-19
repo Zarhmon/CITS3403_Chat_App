@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 import pymysql.cursors
+import traceback
 
 app = Flask(__name__)
 app.secret_key = 'CITS_Secret_Key_3403'
@@ -29,7 +30,11 @@ def login():
                 connection.close()
 
             if user:
-                session['user'] = user
+                session['user'] = {
+                    'id': user[0],
+                    'email': user[1],
+                    'password': user[2]
+                }
                 print(session['user'])  # Add this line for debugging
                 flash('Logged in successfully!', 'success')
                 return redirect(url_for('main'))
@@ -100,25 +105,39 @@ def highscores():
 
 @app.route('/store_score', methods=['POST'])
 def store_score():
-    # Retrieve data from the POST request
-    data = request.get_json()
-    print(data)
-    difficulty = data.get('difficulty')
-    score = data.get('score')
-    user_email = session.get('user').get('email')
-
-    connection = pymysql.connect(**db_params)
     try:
-        with connection.cursor() as cursor:
-            # Insert new score into the database
-            sql_query = "INSERT INTO game_scores (email, difficulty, score) VALUES (%s, %s, %s)"
-            cursor.execute(sql_query, (user_email, difficulty, score))
-            connection.commit()
-        return {"status": "success"}, 200
+        print(request.data)  # Print the raw request data
+        print(request.json)  # Print the parsed JSON data
+        # Retrieve data from the POST request
+        data = request.get_json()
+        print(data)
+        score = data.get('score')
+        user = session.get('user')
+        print(f"Session data: {session}")  # Print the session data for debugging
+
+        if user and isinstance(user, dict) and 'email' in user:
+            user_email = user['email']
+            print(f"User email: {user_email}")  # Print the user's email for debugging
+            print(f"Score: {score}")  # Print the score for debugging
+
+            connection = pymysql.connect(**db_params)
+            try:
+                with connection.cursor() as cursor:
+                    # Insert new score into the database
+                    sql_query = "INSERT INTO game_scores (email, score) VALUES (%s, %s)"
+                    cursor.execute(sql_query, (user_email, score))
+                    connection.commit()
+                return {"status": "success"}, 200
+            except Exception as e:
+                traceback.print_exc()  # Print the exception traceback
+                return {"status": "error", "message": str(e)}, 400
+            finally:
+                connection.close()
+        else:
+            return {"status": "error", "message": "User session data is invalid or incomplete."}, 400
     except Exception as e:
+        traceback.print_exc()
         return {"status": "error", "message": str(e)}, 400
-    finally:
-        connection.close()
 
 
 if __name__ == '__main__':
