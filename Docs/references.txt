@@ -1,1 +1,2 @@
 default_av.png from : https://pngtree.com/freepng/avatar-icon-abstract-user-login-icon_6796233.html
+hangman.png from : https://pngtree.com/element/down?id=NTk1NTA2Mw==&type=1&time=1684470081&token=MGNmNmExYzliNmQzYzhmYzVlNWZhNmI3MjExZTk2ZGI=
