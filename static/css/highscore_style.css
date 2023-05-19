@@ -7,8 +7,17 @@ body {
   font-size: 14px;
 }
 
+@media only screen and (max-width: 480px) {
+  .container {
+    min-width: 320px;
+  }
+}
+
 .page-container {
-  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .container {
@@ -24,13 +33,22 @@ body {
   border-radius: 10px;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  min-height: 200px;
+  overflow-x: auto;
+  overflow-y: scroll; /* Enable scrolling */
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+}
+
+.container::-webkit-scrollbar {
+  width: 0; /* Hide scrollbar for Chrome, Safari, and Opera */
 }
 
 #back-button {
   position: absolute;
   top: 10px;
   right: 10px;
-  padding: 10px;
+  padding: 5px 10px;
   border: none;
   background-color: #4caf50;
   color: #ffffff;
@@ -46,20 +64,35 @@ body {
 
 .highscores-container {
   width: 100%;
+  min-height: 200px;
 }
 
-.highscores-category {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.highscores-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
 }
 
-.highscores-category h2 {
+.highscores-table th,
+.highscores-table td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
   text-align: center;
-  margin-bottom: 10px;
 }
 
-.highscores-category ol {
-  list-style-type: none;
-  padding-left: 0;
+.highscores-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.highscores-table tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.highscores-table tbody tr:hover {
+  background-color: #ddd;
+}
+
+.highscores-table tbody tr:hover td {
+  background-color: initial !important;
 }

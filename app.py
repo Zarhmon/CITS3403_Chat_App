@@ -98,7 +98,24 @@ def guest_login():
 
 @app.route('/highscores')
 def highscores():
-    return render_template('highscore.html')
+    connection = pymysql.connect(**db_params)
+    try:
+        with connection.cursor() as cursor:
+            # Retrieve the top 10 highest scores with corresponding emails
+            sql_query = "SELECT email, score FROM game_scores ORDER BY score DESC LIMIT 20"
+            cursor.execute(sql_query)
+            highscores = cursor.fetchall()
+
+        usernames = []
+        for highscore in highscores:
+            email = highscore[0]
+            username = email.split('@')[0]  # Extract the username from the email
+            usernames.append(username)
+
+    finally:
+        connection.close()
+
+    return render_template('highscore.html', highscores=highscores, usernames=usernames)
 
 
 # added this for storing scores 

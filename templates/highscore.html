@@ -15,12 +15,22 @@
         <button id="back-button">Go Back</button>
         <h1>High Scores</h1>
         <div class="highscores-container">
-          <div class="highscores-category">
-            <h2>All Scores</h2>
-            <ol id="all-highscores">
-              <!-- Highscores will be inserted here dynamically -->
-            </ol>
-          </div>
+          <table class="highscores-table">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for score in highscores %}
+              <tr>
+                <td>{{ score[0].split('@')[0] }}</td>
+                <td>{{ score[1] }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>

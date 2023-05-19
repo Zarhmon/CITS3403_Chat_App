@@ -67,3 +67,9 @@ button[type="submit"] {
 .guest-login h1 {
   margin-bottom: 10px;
 }
+
+@media only screen and (max-width: 480px) {
+  .container {
+    min-width: 320px;
+  }
+}
