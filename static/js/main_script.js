@@ -40,13 +40,11 @@ function addMessage(messageText, isOutgoing, isInnerHTML) {
   // add an avatar image to the message div
   const avatarDiv = document.createElement("div");
   avatarDiv.classList.add("avatar");
-  if (isOutgoing) {
-    let image = document.createElement("img");
-    image.setAttribute("src", "/static/default_av.png");
-    image.setAttribute("width", "40");
-    image.setAttribute("height", "40");
-    avatarDiv.appendChild(image);
-  }
+  let image = document.createElement("img");
+  image.setAttribute("src", isOutgoing ? "/static/default_av.png" : "/static/hangman.png");
+  image.setAttribute("width", "40");
+  image.setAttribute("height", "40");
+  avatarDiv.appendChild(image);
   messageDiv.appendChild(avatarDiv);
 
   // add the message text to the message div
@@ -169,9 +167,9 @@ function interpret(text) {
 
         if (text.hasAnyOf("play", "begin", "start")) {
           addMessage("Select a difficulty by entering one of the following:<br><br>\
-          1: Easy (8 tries allowed)<br>\
-          2: Medium (7 tries allowed)<br>\
-          3: Hard (6 tries allowed)<br><br>\
+          1: Easy (9 tries allowed)<br>\
+          2: Medium (8 tries allowed)<br>\
+          3: Hard (7 tries allowed)<br><br>\
           Alternatively, enter \"quit\" if you do not wish to play.", false, true);
           isSelectingDifficulty = true;
         } else if (text.hasAnyOf("highscore", "record", "high score")) {

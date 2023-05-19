@@ -39,7 +39,7 @@ function checkForDictionaryEntry(word) {
     if (this.status == 200) {
       // dictionary extry exists
       wordJson = JSON.parse(this.responseText)[0];
-      triesLeft = 9 - difficulty;
+      triesLeft = 10 - difficulty;
       lettersGuessed = [];
       guess = new Array();
       isPlaying = true;
