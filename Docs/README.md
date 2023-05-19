@@ -5,7 +5,8 @@ Blake Griffiths (22764777)
 Farrel Kurniawan (23057954)
 Due May 22nd, 2023
 
-Context
+# Context
+
 This application was designed to play a simple game of hangman that uses an uncommon library of words
 to help the user learn while playing a game.
 
@@ -21,7 +22,16 @@ Pythons Flask was used to interact with out MySQL server which was used to store
 as well as holding our lists of high scores.
 We used Visual Studio Codes Prettier plugin to make sure that our code followed the same syntax.
 
-Member Contribution
+# Board for agile / contribution issues:
+
+https://github.com/users/Zarhmon/projects/1/views/1
+
+# Project github:
+
+https://github.com/Zarhmon/CITS3403_Chat_App
+
+# Member Contribution
+
 Blake
 • Game rule creation
 • Game research
@@ -38,7 +48,7 @@ Farrel
 • Game implementation
 • Systems creation
 
-This is the readme containing the steps to run the project.
+# This is the readme containing the steps to run the project.
 
 # To create a environment for Python while in project folder path in terminal type
 
@@ -59,6 +69,8 @@ $env:FLASK_APP = "app.py"
 flask run
 
 # To start the MySQL server in windows
+
+The database tables can be found in the "data" folder in csv format
 
 In windows search function open "Services"
 Scroll the MySQL80 and click start
