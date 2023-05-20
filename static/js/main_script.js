@@ -51,9 +51,9 @@ function addMessage(messageText, isOutgoing, isInnerHTML) {
   const textDiv = document.createElement("div");
   textDiv.classList.add("text");
   if (isInnerHTML) { // check if the text should be parsed as innerText or innerHTML
-    textDiv.innerHTML = "<p>" + messageText + "</p>";
+    textDiv.innerHTML = "<div>" + messageText + "</div>";
   } else {
-    const textP = document.createElement("p");
+    const textP = document.createElement("div");
     textP.innerText = messageText;
     textDiv.appendChild(textP);
   }

@@ -63,8 +63,13 @@ body {
   max-width: calc(100% - 50px);
 }
 
-.chat-box .message .text p {
+.chat-box .message .text div {
   margin: 0;
+}
+
+.chat-box .message .text div ol {
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
 .chat-box .message.outgoing .text {

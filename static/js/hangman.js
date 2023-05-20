@@ -56,7 +56,7 @@ function checkForDictionaryEntry(word) {
 }
 
 function getDefinition() {
-  let meanings = wordJson.meanings;
+  let meanings = wordJson.meanings; // JSON from dictionary API
   if (meanings === undefined) {
     addMessage(`Unfortunately, no definition could be found for <b>${word}</b>.`, false, true);
   } else {
@@ -74,16 +74,16 @@ function getDefinition() {
     text += "<br><small>"
     if (wordJson.sourceUrls.length == 1) {
       let source = wordJson.sourceUrls[0];
-      text += `Source: <a href=${source}>${source}</a><br>`;
+      text += `Source: <a href=${source} target=_blank>${source}</a><br>`;
     } else {
       text += "Sources:<ul>"
       for (let i in wordJson.sourceUrls) {
         let source = wordJson.sourceUrls[i];
-        text += `<li><a href=${source}>${source}</a></li>`;
+        text += `<li><a href=${source} target=_blank>${source}</a></li>`;
       }
       text += "</ul>"
     }
-    text += `Under license: ${license.name} (<a href=${license.url}>${license.url}</a>)</small><br><br>`;
+    text += `Under license: ${license.name} (<a href=${license.url} target=_blank>${license.url}</a>)</small><br><br>`;
     text += "Hopefully, you have learned a new word today!";
     addMessage(text, false, true);
   }
