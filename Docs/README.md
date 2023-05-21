@@ -22,6 +22,12 @@ Pythons Flask was used to interact with out MySQL server which was used to store
 as well as holding our lists of high scores.
 We used Visual Studio Codes Prettier plugin to make sure that our code followed the same syntax.
 
+https://validator.w3.org/nu/#textarea flags a few things which are not issues.
+
+1. Trailing / in html are due to prettier formating and have no impact on the code.
+2. Line 25 in highscore.html causes an error because Jinja2 syntax is not recoqnized.
+   There are a few instances of this.
+
 # Board for agile / contribution:
 
 https://github.com/users/Zarhmon/projects/1/views/1
@@ -106,7 +112,6 @@ then type in "python -W ignore -m appunittests
 
 NOTE: If an error returns saying "ModuleNotFoundError: No module named 'app'", it may be because the 'app' module is not in the python import search path, to
 rectify this type the following into the command line before running the unit tests again "$env:PYTHONPATH = "path/to/parent/directory/of/app/module" "
-
 
 # If having errors the following may needed be download on the machine
 
