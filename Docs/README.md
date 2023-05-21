@@ -54,7 +54,7 @@ Farrel
 
 "py -m venv venv"
 
-# To launch the evnironment in project folder path in terminal run
+# To launch the environment in project folder path in terminal run
 
 Windows: "venv\Scripts\activate"
 Linux/MacOS: "source venv/bin/activate"
@@ -74,6 +74,15 @@ The database tables can be found in the "data" folder in csv format
 
 In windows search function open "Services"
 Scroll the MySQL80 and click start
+
+# To run unit tests for app.py
+
+type in "cd Testing" while in the root directory
+then type in "python -W ignore -m appunittests
+
+NOTE: If an error returns saying "ModuleNotFoundError: No module named 'app'", it may be because the 'app' module is not in the python import search path, to
+rectify this type the following into the command line before running the unit tests again "$env:PYTHONPATH = "path/to/parent/directory/of/app/module" "
+
 
 # If having errors the following may needed be download on the machine
 
