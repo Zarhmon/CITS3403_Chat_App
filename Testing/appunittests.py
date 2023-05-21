@@ -1,22 +1,81 @@
 import unittest
+import pymysql
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from flask import Flask, session
 from app import app
 
 class AppTestCase(unittest.TestCase):
 
+    @classmethod
+    def setUpClass(cls):
+        """ Create a test client, start the web driver, and set up the test table """
+        cls.app = app.test_client()
+        cls.app.testing = True
+
+        # Configure ChromeOptions
+        chrome_options = Options()
+        chrome_options.add_argument("--headless")  # Run Chrome in headless mode (without GUI)
+        chrome_options.add_argument("--no-sandbox")  # Bypass OS security model
+        chrome_options.add_argument("--disable-dev-shm-usage")  # Disable /dev/shm usage
+
+        # Start ChromeDriver
+        cls.driver = webdriver.Chrome(options=chrome_options)
+
+        # Set up the test table
+        db_params = {
+            'host': 'localhost',
+            'user': 'root',
+            'password': 'SQLPASSWORD',
+            'db': 'CITS3403_CHAT_APP'
+        }
+        connection = pymysql.connect(**db_params)
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("CREATE TABLE IF NOT EXISTS test_users (id INT AUTO_INCREMENT PRIMARY KEY, email VARCHAR(255), password VARCHAR(255))")
+                cursor.execute("INSERT INTO test_users (email, password) VALUES ('user@example.com', 'password')")
+                connection.commit()
+        finally:
+            connection.close()
+
+    @classmethod
+    def tearDownClass(cls):
+        """ Quit the web driver and tear down the test table """
+        cls.driver.quit()
+
+        # Tear down the test table
+        db_params = {
+            'host': 'localhost',
+            'user': 'root',
+            'password': 'SQLPASSWORD',
+            'db': 'CITS3403_CHAT_APP'
+        }
+        connection = pymysql.connect(**db_params)
+        try:
+            with connection.cursor() as cursor:
+                cursor.execute("DROP TABLE IF EXISTS test_users")
+                connection.commit()
+        finally:
+            connection.close()
+
     def setUp(self):
-        """ Create a test client """
-        self.app = app.test_client()
-        self.app.testing = True
+        pass
 
     def tearDown(self):
         pass
 
     def test_login_valid_credentials(self):
         """ Test login with valid credentials """
-        response = self.app.post('/login', data={'email': 'user@example.com', 'password': 'password'})
-        self.assertEqual(response.status_code, 302)
-        self.assertEqual(response.location, 'http://localhost/main')
+        self.driver.get('http://localhost/login')
+        email_input = self.driver.find_element_by_name('email')
+        password_input = self.driver.find_element_by_name('password')
+        submit_button = self.driver.find_element_by_css_selector('button[type="submit"]')
+
+        email_input.send_keys('user@example.com')
+        password_input.send_keys('password')
+        submit_button.click()
+
+        self.assertEqual(self.driver.current_url, 'http://localhost/main')
 
     def test_login_invalid_credentials(self):
         """ Test login with invalid credentials """
