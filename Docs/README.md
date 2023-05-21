@@ -22,9 +22,11 @@ Pythons Flask was used to interact with out MySQL server which was used to store
 as well as holding our lists of high scores.
 We used Visual Studio Codes Prettier plugin to make sure that our code followed the same syntax.
 
-# Board for agile / contribution issues:
+# Board for agile / contribution:
 
 https://github.com/users/Zarhmon/projects/1/views/1
+
+GitLog.png in Docs file contains the git log
 
 # Project github:
 
@@ -39,7 +41,7 @@ Blake
 • Meeting lead & Minutes taker
 Zarhmon
 • UX design and implementation
-o Front and backend
+• Front and backend
 • Database creation and implementation
 • Documentation
 Farrel
@@ -70,10 +72,32 @@ flask run
 
 # To start the MySQL server in windows
 
-The database tables can be found in the "data" folder in csv format
+(the tables and data should work in any database but flask is set up specifically for MySQL in our project)
+
+Dummy data including login details and highscores can be found in the "MySQL" folder in csv format
+Table_Creation will create the two tables required "users" "game_scores"
+db_params can be updated in app.py below is what is currently set
+
+db_params = {
+'host': 'localhost',
+'user': 'root',
+'password': 'SQLPASSWORD',
+'db': 'CITS3403_CHAT_APP'
+}
+
+Download the following from : https://dev.mysql.com/downloads/installer/
+Windows (x86, 32-bit), MSI Installer
+(mysql-installer-community-8.0.33.0.msi)
+standard install
 
 In windows search function open "Services"
-Scroll the MySQL80 and click start
+Scroll the MySQL80 and click start to launch MySQL server
+
+Launch the MySQL workbench and create a new connection
+Name the connection CITS3403_CHAT_APP and add the DB params mentioned above
+In the schemas tab import a table with the csv files in the project
+
+The server will be set up and the project can be run with flask run in the file path
 
 # If having errors the following may needed be download on the machine
 
