@@ -101,7 +101,7 @@ def highscores():
     connection = pymysql.connect(**db_params)
     try:
         with connection.cursor() as cursor:
-            # Retrieve the top 10 highest scores with corresponding emails
+            # Retrieve the top 20 highest scores with corresponding emails
             sql_query = "SELECT email, score FROM game_scores ORDER BY score DESC LIMIT 20"
             cursor.execute(sql_query)
             highscores = cursor.fetchall()
