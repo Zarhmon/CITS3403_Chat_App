@@ -42,8 +42,8 @@ function addMessage(messageText, isOutgoing, isInnerHTML) {
   avatarDiv.classList.add("avatar");
   let image = document.createElement("img");
   image.setAttribute("src", isOutgoing ? "/static/default_av.png" : "/static/hangman.png");
-  image.setAttribute("width", "40");
-  image.setAttribute("height", "40");
+  image.setAttribute("width", "39");
+  image.setAttribute("height", "39");
   avatarDiv.appendChild(image);
   messageDiv.appendChild(avatarDiv);
 
